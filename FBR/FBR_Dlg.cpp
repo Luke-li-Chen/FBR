@@ -52,17 +52,27 @@ CFBRDlg::CFBRDlg(CWnd* pParent /*=NULL*/)
     : CDialogEx(CFBRDlg::IDD, pParent)
 {
     m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+    m_csWorkDir = _T("");
+    m_csSrcFormat = _T("");
+    m_csDestFormat = _T("");
 }
 
 void CFBRDlg::DoDataExchange(CDataExchange* pDX)
 {
     CDialogEx::DoDataExchange(pDX);
+    DDX_Text(pDX, IDC_EDIT_DIR, m_csWorkDir);
+    DDV_MaxChars(pDX, m_csWorkDir, 256);
+    DDX_Text(pDX, IDC_EDIT_SRC_FOM, m_csSrcFormat);
+    DDV_MaxChars(pDX, m_csSrcFormat, 255);
+    DDX_Text(pDX, IDC_EDIT_DEST_FOM, m_csDestFormat);
+	DDV_MaxChars(pDX, m_csDestFormat, 255);
 }
 
 BEGIN_MESSAGE_MAP(CFBRDlg, CDialogEx)
     ON_WM_SYSCOMMAND()
     ON_WM_PAINT()
     ON_WM_QUERYDRAGICON()
+    ON_BN_CLICKED(IDC_BUTTON_FIND, &CFBRDlg::OnBnClickedButtonFind)
 END_MESSAGE_MAP()
 
 
@@ -151,3 +161,18 @@ HCURSOR CFBRDlg::OnQueryDragIcon()
     return static_cast<HCURSOR>(m_hIcon);
 }
 
+
+
+void CFBRDlg::OnBnClickedButtonFind()
+{
+    // TODO: 在此添加控件通知处理程序代码
+    UpdateData(TRUE);
+    TRACE("%s\n", m_csWorkDir.GetBuffer());
+
+    CString csSrcFileName;
+    for (int i = 0; i < 10; i++)
+    {
+        csSrcFileName.Format(m_csSrcFormat, i);
+        TRACE("%s\n", csSrcFileName);
+    }
+}
