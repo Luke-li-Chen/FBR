@@ -173,6 +173,7 @@ void CFBRDlg::OnBnClickedButtonFind()
     for (int i = 0; i < 10; i++)
     {
         csSrcFileName.Format(m_csSrcFormat, i);
-        TRACE("%s\n", csSrcFileName);
+        // 黑科技测试
+        //TRACE("%s\n", csSrcFileName);
     }
 }
